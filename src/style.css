@@ -1,5 +1,5 @@
 .top-strip {
-  background-color: rgb(92, 74, 192);
+  background-color: #5c4ac0;
 }
 
 .search-form {
@@ -57,7 +57,7 @@
 }
 
 .load-more{
-  color: floralwhite;
-  background-color:  rgb(92, 74, 192);
+  color: #fffaf0;
+  background-color:  #5c4ac0;
   font-size: 30px;
 }

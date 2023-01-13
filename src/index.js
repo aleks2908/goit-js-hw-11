@@ -38,7 +38,7 @@ async function goFatch() {
     let totalHits = resp.data.totalHits;
     if (totalHits === 0) {
       Notiflix.Notify.failure(
-        "Sorry, but we didn't find any results for your search."
+        'Sorry, there are no images matching your search query. Please try again.'
       );
       return;
     } else if (page === 1) {
