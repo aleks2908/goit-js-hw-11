@@ -5,17 +5,26 @@ import Notiflix from 'notiflix';
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
-const loadMoreBtn = document.querySelector('.load-more');
+// const loadMoreBtn = document.querySelector('.load-more');
+const guard = document.querySelector('.js-guard');
 
 form.addEventListener('submit', onFormSubmit);
-loadMoreBtn.addEventListener('click', goFatch);
+// loadMoreBtn.addEventListener('click', goFatch);
 let page = 0;
 let searchQuerry = '';
+
+const options = {
+  root: null,
+  rootMargin: '300px',
+  threshold: 1.0,
+};
+
+const observer = new IntersectionObserver(onInfinityLoad, options);
 
 function onFormSubmit(evt) {
   evt.preventDefault();
   searchQuerry = evt.currentTarget.elements.searchQuery.value;
-  loadMoreBtn.hidden = true;
+  // loadMoreBtn.hidden = true;
   gallery.innerHTML = '';
   page = 0;
   if (!evt.currentTarget.elements.searchQuery.value.trim()) {
@@ -48,8 +57,10 @@ async function goFatch() {
     }
 
     renderMarkup(resp.data.hits);
+    observer.observe(guard);
     if (page * 40 >= totalHits) {
-      loadMoreBtn.hidden = true;
+      observer.unobserve(guard);
+      // loadMoreBtn.hidden = true;
       Notiflix.Notify.warning(
         "We're sorry, but you've reached the end of search results."
       );
@@ -60,18 +71,18 @@ async function goFatch() {
 }
 
 function renderMarkup(cards) {
-  try {
-    let cardsMarkup = cards
-      .map(
-        ({
-          webformatURL,
-          largeImageURL,
-          tags,
-          likes,
-          views,
-          comments,
-          downloads,
-        }) => `<div class="photo-card">
+   try {
+     let cardsMarkup = cards
+       .map(
+         ({
+           webformatURL,
+           largeImageURL,
+           tags,
+           likes,
+           views,
+           comments,
+           downloads,
+         }) => `<div class="photo-card">
 <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/>
   <div class="info">
     <p class="info-item">
@@ -88,12 +99,51 @@ function renderMarkup(cards) {
     </p>
   </div>
 </div>`
-      )
-      .join('');
+       )
+       .join('');
 
-    gallery.insertAdjacentHTML('beforeend', cardsMarkup);
-    loadMoreBtn.hidden = false;
-  } catch (error) {
-    console.log(error);
-  }
+     gallery.insertAdjacentHTML('beforeend', cardsMarkup);
+    //  loadMoreBtn.hidden = false;
+   } catch (error) {
+     console.log(error);
+   }
 }
+
+
+function onInfinityLoad(entries, observer) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      goFatch(observer);
+    }
+    }
+  );
+}
+
+// new SimpleLightbox('.gallery a', {
+//   captionsData: 'alt',
+//   captionDelay: 250,
+// });
+
+//   <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/>
+
+// import { galleryItems } from './gallery-items.js';
+
+// const gallery = document.querySelector('.gallery');
+
+// const galleryMarkup = galleryItems
+//   .map(
+//     ({ preview, original, description }) =>
+//       `<a class="gallery__item" href="${original}">
+//       <img class="gallery__image" src="${preview}" alt="${description}" /></a>`
+//   )
+//   .join('');
+
+// gallery.innerHTML = galleryMarkup;
+
+// new SimpleLightbox('.gallery a', {
+//   captionsData: 'alt',
+//   captionDelay: 250,
+// });
+
+//   <a href="${largeImageURL}">
+// //       <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/></a>
