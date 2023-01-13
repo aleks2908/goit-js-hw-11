@@ -1,5 +1,8 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
+// import SimpleLightbox from 'simplelightbox';
+// console.log('SimpleLightbox: ', SimpleLightbox);
+// console.log();
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
@@ -69,7 +72,7 @@ function renderMarkup(cards) {
         comments,
         downloads,
       }) => `<div class="photo-card">
-  <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/>
+<img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/>
   <div class="info">
     <p class="info-item">
       <b>Likes</b><br>${likes}
@@ -91,3 +94,32 @@ function renderMarkup(cards) {
   gallery.insertAdjacentHTML('beforeend', cardsMarkup);
   loadMoreBtn.hidden = false;
 }
+
+// new SimpleLightbox('.gallery a', {
+//   captionsData: 'alt',
+//   captionDelay: 250,
+// });
+
+//   <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/>
+
+// import { galleryItems } from './gallery-items.js';
+
+// const gallery = document.querySelector('.gallery');
+
+// const galleryMarkup = galleryItems
+//   .map(
+//     ({ preview, original, description }) =>
+//       `<a class="gallery__item" href="${original}">
+//       <img class="gallery__image" src="${preview}" alt="${description}" /></a>`
+//   )
+//   .join('');
+
+// gallery.innerHTML = galleryMarkup;
+
+// new SimpleLightbox('.gallery a', {
+//   captionsData: 'alt',
+//   captionDelay: 250,
+// });
+
+//   <a href="${largeImageURL}">
+// //       <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/></a>
