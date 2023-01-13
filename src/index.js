@@ -1,8 +1,7 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
 // import SimpleLightbox from 'simplelightbox';
-// console.log('SimpleLightbox: ', SimpleLightbox);
-// console.log();
+// import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
