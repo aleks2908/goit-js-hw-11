@@ -118,32 +118,3 @@ function onInfinityLoad(entries, observer) {
     }
   );
 }
-
-// new SimpleLightbox('.gallery a', {
-//   captionsData: 'alt',
-//   captionDelay: 250,
-// });
-
-//   <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/>
-
-// import { galleryItems } from './gallery-items.js';
-
-// const gallery = document.querySelector('.gallery');
-
-// const galleryMarkup = galleryItems
-//   .map(
-//     ({ preview, original, description }) =>
-//       `<a class="gallery__item" href="${original}">
-//       <img class="gallery__image" src="${preview}" alt="${description}" /></a>`
-//   )
-//   .join('');
-
-// gallery.innerHTML = galleryMarkup;
-
-// new SimpleLightbox('.gallery a', {
-//   captionsData: 'alt',
-//   captionDelay: 250,
-// });
-
-//   <a href="${largeImageURL}">
-// //       <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/></a>
