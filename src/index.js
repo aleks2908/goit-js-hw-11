@@ -71,18 +71,18 @@ async function goFatch() {
 }
 
 function renderMarkup(cards) {
-   try {
-     let cardsMarkup = cards
-       .map(
-         ({
-           webformatURL,
-           largeImageURL,
-           tags,
-           likes,
-           views,
-           comments,
-           downloads,
-         }) => `<div class="photo-card">
+  try {
+    let cardsMarkup = cards
+      .map(
+        ({
+          webformatURL,
+          largeImageURL,
+          tags,
+          likes,
+          views,
+          comments,
+          downloads,
+        }) => `<div class="photo-card">
 <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/>
   <div class="info">
     <p class="info-item">
@@ -99,22 +99,20 @@ function renderMarkup(cards) {
     </p>
   </div>
 </div>`
-       )
-       .join('');
+      )
+      .join('');
 
-     gallery.insertAdjacentHTML('beforeend', cardsMarkup);
+    gallery.insertAdjacentHTML('beforeend', cardsMarkup);
     //  loadMoreBtn.hidden = false;
-   } catch (error) {
-     console.log(error);
-   }
+  } catch (error) {
+    console.log(error);
+  }
 }
-
 
 function onInfinityLoad(entries, observer) {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      goFatch(observer);
+      goFatch();
     }
-    }
-  );
+  });
 }
