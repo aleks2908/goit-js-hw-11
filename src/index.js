@@ -55,22 +55,23 @@ async function goFatch() {
       );
     }
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 }
 
 function renderMarkup(cards) {
-  let cardsMarkup = cards
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) => `<div class="photo-card">
+  try {
+    let cardsMarkup = cards
+      .map(
+        ({
+          webformatURL,
+          largeImageURL,
+          tags,
+          likes,
+          views,
+          comments,
+          downloads,
+        }) => `<div class="photo-card">
 <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/>
   <div class="info">
     <p class="info-item">
@@ -87,38 +88,12 @@ function renderMarkup(cards) {
     </p>
   </div>
 </div>`
-    )
-    .join('');
+      )
+      .join('');
 
-  gallery.insertAdjacentHTML('beforeend', cardsMarkup);
-  loadMoreBtn.hidden = false;
+    gallery.insertAdjacentHTML('beforeend', cardsMarkup);
+    loadMoreBtn.hidden = false;
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-// new SimpleLightbox('.gallery a', {
-//   captionsData: 'alt',
-//   captionDelay: 250,
-// });
-
-//   <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/>
-
-// import { galleryItems } from './gallery-items.js';
-
-// const gallery = document.querySelector('.gallery');
-
-// const galleryMarkup = galleryItems
-//   .map(
-//     ({ preview, original, description }) =>
-//       `<a class="gallery__item" href="${original}">
-//       <img class="gallery__image" src="${preview}" alt="${description}" /></a>`
-//   )
-//   .join('');
-
-// gallery.innerHTML = galleryMarkup;
-
-// new SimpleLightbox('.gallery a', {
-//   captionsData: 'alt',
-//   captionDelay: 250,
-// });
-
-//   <a href="${largeImageURL}">
-// //       <img src="${webformatURL}" alt="${tags}" class="photo" loading="lazy" width=100%/></a>
